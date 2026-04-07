@@ -1,1 +1,1 @@
-# instlink-agent-releases
+# instlink-releases
