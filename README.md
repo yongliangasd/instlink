@@ -1,4 +1,4 @@
-# instlink-releases
+# instlink
 # InstLink: High-Performance P2P NAT Traversal & Service Gateway
 
 **InstLink** is an all-in-one, ultra-fast remote access solution designed for Homelabbers and developers. It enables you to securely expose your internal services (NAS, Web, Gaming Servers, etc.) to the internet without the need for complex port forwarding or heavy relay servers.
