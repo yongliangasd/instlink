@@ -1,57 +1,56 @@
-# instlink
-# InstLink: High-Performance P2P NAT Traversal & Service Gateway
+# InstLink: 高性能 P2P NAT 穿透与服务网关
 
-**InstLink** is an all-in-one, ultra-fast remote access solution designed for Homelabbers and developers. It enables you to securely expose your internal services (NAS, Web, Gaming Servers, etc.) to the internet without the need for complex port forwarding or heavy relay servers.
+**InstLink** 是一款专为 Homelab 爱好者和开发者设计的一体化、极速远程访问解决方案。它可以帮助您安全地将内部服务（如 NAS、Web 服务器、游戏服务器等）暴露到互联网，无需复杂的端口转发或沉重的中央转发服务器。
 
-### 🌟 Core Features
-*   **Unidirectional NAT Mapping**: InstLink creates a "Public-facing" entry for your internal services. **Visitors can access your services using any standard client (Browser, SSH, VNC, etc.) WITHOUT installing the InstLink client.**
-*   **True P2P Performance**: Optimized TCP/UDP hole punching that delivers a direct connection with the lowest possible latency.
-*   **Integrated DDNS**: Native support for Cloudflare and Aliyun to manage your public IP records automatically.
-*   **Extreme Performance**: Built with Go and a custom-optimized relay engine, capable of handling high-bandwidth scenarios (up to 10Gbps with minimal CPU overhead).
+### 🌟 核心特性
+*   **单向 NAT 映射**：InstLink 为您的内部服务创建“面向公网”的入口。**访客只需使用标准客户端（浏览器、SSH、VNC 等）即可直接访问，无需安装 InstLink 客户端。**
+*   **纯正 P2P 性能**：经过深度优化的 TCP/UDP 打洞技术，提供超低延迟的直接连接。
+*   **内置 DDNS**：原生支持 Cloudflare 和阿里云，自动管理您的公网 IP 记录。
+*   **极致性能**：采用 Go 语言编写，配合自研优化的转发引擎，能够轻松应对高带宽场景（最低 CPU 占用下可支持 10Gbps+ 吞吐）。
 
 ---
 
-### 🚀 Installation Guide
+### 🚀 安装指南
 
-InstLink is a single binary with zero dependencies. 
+InstLink 是单二进制文件，零依赖，绿色运行。
 
 #### **Linux / macOS / OpenWrt**
-1.  **Download** the binary for your architecture.
-2.  **Install as a service**:
+1.  **下载** 对应架构的二进制文件。
+2.  **作为服务安装**：
     ```bash
     chmod +x instlink
     sudo ./instlink install
     sudo ./instlink start
     ```
-3.  **Access** the local management panel at `http://YOUR_IP:15001`.
+3.  **访问** 本地管理面板：`http://你的IP:15001`。
 
 #### **Windows**
-1.  **Download** `instlink-windows-amd64.exe`.
-2.  **Open CMD/PowerShell** as Administrator.
-3.  **Run**:
+1.  **下载** `instlink-windows-amd64.exe`。
+2.  **以管理员身份打开** CMD 或 PowerShell。
+3.  **运行以下命令**：
     ```powershell
     .\instlink.exe install
     .\instlink.exe start
     ```
-4.  **Access** the panel at `http://localhost:15001`.
+4.  **访问** 面板：`http://localhost:15001`。
 
 ---
 
-### 🛡️ Why InstLink vs. Tailscale?
+### 🛡️ 为什么选择 InstLink (对比 Tailscale)？
 
-While Tailscale is a fantastic overlay VPN, **InstLink** is designed for a different set of priorities:
+虽然 Tailscale 是一款非常优秀的 Overlay VPN，但 **InstLink** 的设计理念侧重点不同：
 
-| Feature | InstLink | Tailscale |
+| 特性 | InstLink | Tailscale |
 | :--- | :--- | :--- |
-| **Connection Model** | **Direct P2P Focus**: Prioritizes raw TCP/UDP port-to-port mapping. | **Mesh VPN**: Creates a virtual network interface (TUN/TAP). |
-| **Visitor Requirement** | **No Client Needed**: Standard browsers/apps can connect directly. | **Client Required**: Visitors must be on your Tailnet. |
-| **Latency** | **Ultra-Low**: Direct connection without the overhead of a virtual network driver. | **Moderate**: Encapsulation and virtual routing add slight latency. |
-| **Relay Dependency** | **Zero Relay Design**: Designed to function without costly central relay servers (DERP). | **Relay Fallback**: Frequently falls back to DERP relays if P2P fails, which can be slow. |
-| **Service Visibility** | **Public-facing**: Can map to public domains via integrated DDNS. | **Private-only**: Restricted to the Tailnet unless using Funnel (limited). |
-| **Performance** | **1Gbps+ Native**: Optimized for high-throughput tasks like 4K streaming or large file transfers. | **CPU-Bound**: Encryption overhead often limits throughput on low-power devices. |
+| **连接模型** | **直连 P2P**：专注于原始 TCP/UDP 端口到端口的映射。 | **网状 VPN**：创建虚拟网卡（TUN/TAP）来构建局域网。 |
+| **访客门槛** | **无需客户端**：标准浏览器或 App 可直接连接，无需访客安装任何软件。 | **必须安装客户端**：访客必须加入您的 Tailnet 虚拟网络才能访问。 |
+| **延迟** | **极低**：直接连接，没有虚拟网络驱动层的封装损耗。 | **中等**：封包转换和虚拟路由会产生一定的延迟。 |
+| **转发依赖** | **零转发设计**：旨在不依赖昂贵的中央转发服务器运行。 | **中转回退**：如果 P2P 失败，经常回退到 DERP 中转，速度较慢。 |
+| **服务可见性** | **面向公网**：配合内置 DDNS 可映射到公网域名，方便全网访问。 | **仅限私有**：除非使用 Funnel（有限制），否则仅限内部访问。 |
+| **性能** | **原生 1Gbps+**：针对 4K 串流、大文件传输等高吞吐量任务进行了优化。 | **受限于 CPU**：加密损耗常导致在低功耗设备上吞吐受限。 |
 
 ---
 
-### 💡 Tips for Pro Users
-*   **One-Click Binding**: Link your Agent to the Server instantly using a secure binding token.
-*   **Traffic Stats**: Get real-time upload/download metrics for every single tunnel.
+### 💡 极客小技巧
+*   **一键绑定**：使用安全绑定令牌，让 Agent 瞬间关联到控制服务器。
+*   **流量统计**：实时查看每一个隧道的上行/下行速率和总流量指标。
